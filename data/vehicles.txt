@@ -1,0 +1,19 @@
+LKS-218,Renault Clio,39,Manual Transmission
+PNE-604,Peugeot 208,46,Air Conditioning,Manual Transmission
+FRO-377,Toyota Yaris Cross,68,Air Conditioning,Hybrid,Automatic Transmission
+DUV-129,Citroen C3,44,Air Conditioning,Manual Transmission
+MAT-850,Skoda Octavia Combi,61,Air Conditioning,Manual Transmission,Tow Bar
+RUX-42,Fiat Panda,36,Manual Transmission
+GEB-913,Kia Niro,74,Air Conditioning,Electric,Automatic Transmission
+HOL-566,Opel Corsa,47,Air Conditioning,Manual Transmission
+VAP-305,Hyundai i30,53,Air Conditioning,Manual Transmission,Cruise Control
+SIR-741,Volvo XC40,96,Air Conditioning,Hybrid,Automatic Transmission,Four-Wheel Drive
+TEN-288,Dacia Sandero,34,Manual Transmission
+NOK-63,BMW 118i,88,Air Conditioning,Automatic Transmission
+QUA-472,Mazda CX-30,79,Air Conditioning,Automatic Transmission,Navigation System
+BEL-190,Renault Megane E-Tech,82,Air Conditioning,Electric,Automatic Transmission
+ODI-537,Ford Puma,64,Air Conditioning,Hybrid,Manual Transmission
+YLE-814,Volkswagen ID.3,85,Air Conditioning,Electric,Automatic Transmission
+CAP-256,Seat Leon,57,Air Conditioning,Manual Transmission
+WIM-909,Mercedes-Benz Vito,118,Air Conditioning,Manual Transmission,9 Seats
+JOR-71,Tesla Model Y,124,Air Conditioning,Electric,Automatic Transmission,Four-Wheel Drive

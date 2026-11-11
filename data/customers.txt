@@ -1,0 +1,12 @@
+24/11/1987,Hugo,Lambert,Hugo.Lambert@outlook.com
+03/06/1993,Chloe,Girard,Chloe.Girard@live.com
+19/09/1980,Karim,Haddad,Karim.Haddad@orange.fr
+14/03/1998,Lea,Moreau,Lea.Moreau@gmail.com
+08/12/1965,Bernard,Fontaine,Bernard.Fontaine@laposte.net
+27/05/2001,Ines,Carvalho,Ines.Carvalho@gmail.com
+02/02/1975,Piotr,Nowak,Piotr.Nowak@wp.pl
+30/07/1996,Sofia,Ricci,Sofia.Ricci@yahoo.it
+11/04/1999,Yuki,Tanaka,Yuki.Tanaka@gmail.com
+21/08/1983,Lars,Eriksen,Lars.Eriksen@hotmail.com
+06/10/2003,Noah,Dubois,Noah.Dubois@univ-lille.fr
+15/01/1991,Aino,Korhonen,Aino.Korhonen@gmail.com
