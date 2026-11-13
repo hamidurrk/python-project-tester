@@ -1,5 +1,13 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+import os, sys
+sys.path.insert(0, os.path.abspath(os.path.join(SPECPATH)))
+import build_meta
+
+# Version resource is generated from app_info.py (single source of truth)
+VERSION_FILE = build_meta.write_windows_version_file(
+    os.path.join(SPECPATH, '_generated_version_info.txt'))
+
 block_cipher = None
 
 a = Analysis(
@@ -62,7 +70,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    version='../build_scripts/version_info.txt',
+    version=VERSION_FILE,
     icon='../assets/icon.png',
     uac_admin=False,  # Don't require admin rights
     uac_uiaccess=False,

@@ -22,6 +22,8 @@ from pygments.token import Token
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
+import app_info
+
 def get_base_dir():
 	if getattr(sys, 'frozen', False):
 		documents = Path.home() / "Documents"
@@ -116,7 +118,7 @@ def get_python_executable():
 class PythonTesterApp:
 	def __init__(self, root: tk.Tk) -> None:
 		self.root = root
-		self.root.title("Project Tester")
+		self.root.title(f"{app_info.APP_NAME} v{app_info.APP_VERSION}")
 		
 		self.root.minsize(1220, 600)
 		
@@ -360,7 +362,7 @@ class PythonTesterApp:
 		adjust_row.grid(row=1, column=1, sticky="ew", pady=(6, 0))
 		adjust_row.columnconfigure(2, weight=1)
 
-		self.points_adjust_var = tk.StringVar(value="4")
+		self.points_adjust_var = tk.StringVar(value="5")
 		
 		def validate_points_input(new_value):
 			if new_value == "":
@@ -1104,7 +1106,7 @@ class PythonTesterApp:
 
 	def _reset_points(self) -> None:
 		self.current_points = 100
-		self.points_adjust_var.set("4")
+		self.points_adjust_var.set("5")
 		self.points_history.clear()  
 		self._update_points_display()
 		self._save_config()

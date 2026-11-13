@@ -1,0 +1,91 @@
+name: Build executables
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tag must match app_info.APP_VERSION
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          v=$(python3 -c "import app_info; print(app_info.APP_VERSION)")
+          if [ "v$v" != "${GITHUB_REF_NAME}" ]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match app_info.py version v$v"; exit 1
+          fi
+
+  build:
+    needs: verify-version
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: windows-x64
+            os: windows-latest
+            spec: build_scripts/ProjectTester.spec
+            req: requirements.txt
+          - name: macos-arm64
+            os: macos-14
+            spec: build_scripts/ProjectTester_macOS.spec
+            req: requirements-macos.txt
+          - name: macos-intel
+            os: macos-15-intel
+            spec: build_scripts/ProjectTester_macOS.spec
+            req: requirements-macos.txt
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: ${{ matrix.req }}
+
+      - name: Install dependencies
+        run: python -m pip install -r ${{ matrix.req }}
+
+      - name: Build
+        run: python -m PyInstaller ${{ matrix.spec }} --clean --noconfirm
+
+      - name: Package (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $v = python -c "import app_info; print(app_info.APP_VERSION)"
+          New-Item -ItemType Directory -Force release | Out-Null
+          Compress-Archive -Path dist\Project-Tester.exe -DestinationPath "release\ProjectTester-$v-${{ matrix.name }}.zip"
+
+      - name: Package (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          v=$(python -c "import app_info; print(app_info.APP_VERSION)")
+          mkdir -p release
+          ditto -c -k --sequesterRsrc --keepParent dist/ProjectTester.app "release/ProjectTester-$v-${{ matrix.name }}.zip"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ProjectTester-${{ matrix.name }}
+          path: release/*.zip
+          if-no-files-found: error
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: release
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: release/*.zip
+          generate_release_notes: true

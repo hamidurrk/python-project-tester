@@ -60,7 +60,7 @@ project-root/
 │   └── ProjectTester.exe    ← Your standalone executable
 ├── build/                    ← Temporary build files (can be deleted)
 ├── ProjectTester.spec        ← PyInstaller configuration
-├── version_info.txt          ← Windows version info
+├── build_meta.py             ← Generates version info from ../app_info.py
 └── build_exe.ps1            ← Build script
 ```
 

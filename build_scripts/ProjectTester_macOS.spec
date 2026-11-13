@@ -1,6 +1,11 @@
 # -*- mode: python ; coding: utf-8 -*-
 # PyInstaller spec file for macOS
 
+import os, sys
+sys.path.insert(0, os.path.abspath(os.path.join(SPECPATH)))
+import build_meta  # noqa: F401  (also puts project root on sys.path)
+import app_info
+
 block_cipher = None
 
 a = Analysis(
@@ -76,10 +81,11 @@ app = BUNDLE(
     icon='../assets/icon.png',
     bundle_identifier='com.projecttester.app',
     info_plist={
-        'CFBundleName': 'Project Tester',
-        'CFBundleDisplayName': 'Project Tester',
-        'CFBundleShortVersionString': '1.0.3',
-        'CFBundleVersion': '1.0.3',
+        'CFBundleName': app_info.APP_NAME,
+        'CFBundleDisplayName': app_info.APP_NAME,
+        'NSHumanReadableCopyright': app_info.APP_COPYRIGHT,
+        'CFBundleShortVersionString': app_info.APP_VERSION,
+        'CFBundleVersion': app_info.APP_VERSION,
         'CFBundlePackageType': 'APPL',
         'CFBundleSignature': '????',
         'CFBundleExecutable': 'ProjectTester',

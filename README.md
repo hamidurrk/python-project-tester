@@ -2,7 +2,7 @@
 
 A Python submission testing application with an integrated terminal, syntax highlighting, real-time file monitoring, and point tracking.
 
-![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)
+![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.13+-green.svg)
 ![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)
 ![License](https://img.shields.io/badge/license-MIT-orange.svg)
@@ -135,7 +135,7 @@ Currently, pre-built executables are available only for `Windows`. MacOS builds 
 ### Point Tracking
 
 - Start with 100 points
-- Adjust points with +/- values (default: -4)
+- Adjust points with +/- values (default: -5)
 - Automatic grade assignment:
   - **Grade 5**: 90-100 points (Green)
   - **Grade 4**: 80-89 points (Teal)
@@ -213,7 +213,7 @@ The build is configured in `ProjectTester.spec`:
 - name: 'ProjectTester'
 - console: False (GUI only, no console window)
 - icon: 'assets/icon.png'
-- version: 'version_info.txt' (Windows metadata)
+- version: generated from app_info.py (Windows metadata)
 - onefile: True (single executable)
 - uac_admin: False (no admin rights required)
 
@@ -239,9 +239,11 @@ The build is configured in `ProjectTester.spec`:
 The executable includes proper Windows metadata:
 - **Product Name**: Project Tester
 - **Author**: Hamidur
-- **Version**: 1.0.0.0
+- **Version**: 1.1.0.0
 - **Description**: Project Tester - A Python submission testing application
-- **Copyright**: © 2025 Hamidur. All rights reserved.
+- **Copyright**: © 2026 Hamidur. All rights reserved.
+
+> **Single source of truth:** version, author and year live only in [`app_info.py`](app_info.py). The Windows version resource and macOS `Info.plist` are generated from it at build time, and the app title bar reads it too. Update the README badge/values by hand when bumping.
 
 ## Project Structure
 
@@ -262,7 +264,7 @@ python-project-tester-2025/
 │   ├── build_exe.ps1              # PowerShell build script
 │   ├── BUILD_INSTRUCTIONS.md      # Detailed build guide
 │   ├── ProjectTester.spec         # PyInstaller configuration
-│   └── version_info.txt           # Windows version metadata
+│   └── build_meta.py              # Derives Windows/macOS metadata from app_info.py
 ├── .venv/                         # Virtual environment (not in repo)
 ├── build/                         # Build artifacts (not in repo)
 ├── dist/                          # Built executable (not in repo)
@@ -401,13 +403,6 @@ python -m pytest
 python tester.py
 ```
 
-### Code Style
-
-- Follow PEP 8
-- Use type hints
-- Add docstrings for functions/classes
-- Keep functions focused and modular
-
 ## License
 
 This project is licensed under the MIT License - see below for details:
@@ -438,7 +433,7 @@ SOFTWARE.
 
 ## Author
 
-**Hamidur**
+**Hamidur Khan**
 
 - GitHub: [@hamidurrk](https://github.com/hamidurrk)
 - Repository: [python-project-tester-2025](https://github.com/hamidurrk/python-project-tester-2025)

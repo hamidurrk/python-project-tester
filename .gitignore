@@ -91,3 +91,4 @@ Desktop.ini
 # dotenv
 .env
 .env.*
+build_scripts/_generated_version_info.txt
